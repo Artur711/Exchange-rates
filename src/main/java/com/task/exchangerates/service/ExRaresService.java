@@ -1,6 +1,7 @@
 package com.task.exchangerates.service;
 
 import com.task.exchangerates.client.NbpClient;
+import com.task.exchangerates.entity.Table;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class ExRaresService {
         this.nbpClient = nbpClient;
     }
 
-    public String getSample(String table) throws URISyntaxException, IOException, InterruptedException {
+    public Table getSample(String table) throws URISyntaxException, IOException, InterruptedException {
         return nbpClient.getSample(table);
     }
 }
