@@ -1,4 +1,4 @@
-package com.task.exchangerates.entity.api;
+package com.task.exchangerates.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;

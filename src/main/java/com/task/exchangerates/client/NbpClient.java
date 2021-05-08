@@ -3,8 +3,8 @@ package com.task.exchangerates.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.task.exchangerates.entity.api.CurrencyTable;
-import com.task.exchangerates.entity.api.Table;
+import com.task.exchangerates.entity.CurrencyTable;
+import com.task.exchangerates.entity.Table;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 

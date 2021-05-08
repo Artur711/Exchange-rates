@@ -1,4 +1,4 @@
-package com.task.exchangerates.entity;
+package com.task.exchangerates.dto;
 
 import com.task.exchangerates.util.Currency;
 

@@ -1,9 +1,9 @@
 package com.task.exchangerates.service;
 
 import com.task.exchangerates.client.NbpClient;
-import com.task.exchangerates.entity.Amount;
-import com.task.exchangerates.entity.Exchange;
-import com.task.exchangerates.entity.api.Table;
+import com.task.exchangerates.dto.Amount;
+import com.task.exchangerates.dto.Exchange;
+import com.task.exchangerates.entity.Table;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

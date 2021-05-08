@@ -1,10 +1,12 @@
 package com.task.exchangerates.controller;
 
-import com.task.exchangerates.entity.Amount;
-import com.task.exchangerates.entity.Exchange;
-import com.task.exchangerates.entity.api.Table;
+import com.task.exchangerates.dto.Amount;
+import com.task.exchangerates.dto.CurrencyDto;
+import com.task.exchangerates.dto.Exchange;
+import com.task.exchangerates.entity.Table;
 import com.task.exchangerates.service.ExRaresService;
 import com.task.exchangerates.util.Currency;
+import com.task.exchangerates.util.CurrencyToCurrencyDtoConverter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,21 +14,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/exchange-rates")
 public class ExRaresController {
 
     private final ExRaresService exRaresService;
+    private final CurrencyToCurrencyDtoConverter converter;
 
-    public ExRaresController(ExRaresService exRaresService) {
+    public ExRaresController(ExRaresService exRaresService, CurrencyToCurrencyDtoConverter converter) {
         this.exRaresService = exRaresService;
+        this.converter = converter;
     }
 
     @GetMapping
-    public Table getRates() throws
-            URISyntaxException, IOException, InterruptedException {
-        return exRaresService.getRates();
+    public List<CurrencyDto> getRates() {
+        return converter.convertAll(Arrays.asList(Currency.values()));
     }
 
     @GetMapping("/exchange")

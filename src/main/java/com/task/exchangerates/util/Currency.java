@@ -6,7 +6,7 @@ public enum Currency {
     EUR("euro"),
     USD("dolar amerykański"),
     GBP("funt szterling"),
-    CHT("frank szwajcarski"),
+    CHF("frank szwajcarski"),
     RUB("rubel rosyjski"),
     CNY("yuan renminbi (Chiny)"),
     TRY("lira turecka"),
@@ -16,5 +16,9 @@ public enum Currency {
 
     Currency(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
