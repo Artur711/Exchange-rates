@@ -1,10 +1,13 @@
 package com.task.exchangerates.controller;
 
-import com.task.exchangerates.entity.Table;
+import com.task.exchangerates.entity.Amount;
+import com.task.exchangerates.entity.Exchange;
+import com.task.exchangerates.entity.api.Table;
 import com.task.exchangerates.service.ExRaresService;
+import com.task.exchangerates.util.Currency;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -21,8 +24,27 @@ public class ExRaresController {
     }
 
     @GetMapping
-    public Table getSample(@RequestParam(required = false) String table) throws
+    public Table getRates() throws
             URISyntaxException, IOException, InterruptedException {
-        return (table == null) ? exRaresService.getSample("A") : exRaresService.getSample(table.toUpperCase());
+        return exRaresService.getRates();
+    }
+
+    @GetMapping("/exchange")
+    public Amount exchange(@RequestBody Exchange exchange) throws
+            URISyntaxException, IOException, InterruptedException {
+
+        return (exchange.getExchangeFrom().equals(exchange.getExchangeTo())) ?
+                new Amount(exchange.getAmount(), exchange.getExchangeTo()) :
+                exRaresService.exchangeRates(exchange);
+    }
+
+    @GetMapping("/list")
+    public Table getRatesList() throws URISyntaxException, IOException, InterruptedException {
+        return exRaresService.getRates();
+    }
+
+    @GetMapping("/exchange/sample")
+    public Exchange exchangeSample() {
+        return new Exchange(1068.3, Currency.EUR, Currency.USD);
     }
 }
