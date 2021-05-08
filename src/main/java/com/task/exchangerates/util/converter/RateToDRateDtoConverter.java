@@ -1,7 +1,7 @@
 package com.task.exchangerates.util.converter;
 
 import com.task.exchangerates.dto.RateDto;
-import com.task.exchangerates.entity.Rate;
+import com.task.exchangerates.model.Rate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

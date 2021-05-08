@@ -4,7 +4,7 @@ import com.task.exchangerates.dto.AmountDto;
 import com.task.exchangerates.dto.CurrencyDto;
 import com.task.exchangerates.dto.ExchangeDto;
 import com.task.exchangerates.dto.RateDto;
-import com.task.exchangerates.service.ExRaresService;
+import com.task.exchangerates.service.ExRatesService;
 import com.task.exchangerates.util.enums.Currency;
 import com.task.exchangerates.util.converter.CurrencyToCurrencyDtoConverter;
 import io.swagger.annotations.ApiOperation;
@@ -20,19 +20,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/exchange-rates")
-public class ExRaresController {
+public class ExRatesController {
 
-    private final ExRaresService exRaresService;
+    private final ExRatesService exRatesService;
     private final CurrencyToCurrencyDtoConverter converter;
 
-    public ExRaresController(ExRaresService exRaresService, CurrencyToCurrencyDtoConverter converter) {
-        this.exRaresService = exRaresService;
+    public ExRatesController(ExRatesService exRatesService, CurrencyToCurrencyDtoConverter converter) {
+        this.exRatesService = exRatesService;
         this.converter = converter;
     }
 
     @GetMapping
     @ApiOperation(value = "List of currencies available for conversion")
     public List<CurrencyDto> getRates() {
+        exRatesService.addTextAsCall("Sharing list of available currencies.");
         return converter.convertAll(Arrays.asList(Currency.values()));
     }
 
@@ -43,12 +44,12 @@ public class ExRaresController {
 
         return (exchange.getExchangeFrom().equals(exchange.getExchangeTo())) ?
                 new AmountDto(exchange.getAmount(), exchange.getExchangeTo()) :
-                exRaresService.exchangeRates(exchange);
+                exRatesService.exchangeRates(exchange);
     }
 
     @GetMapping("/list")
     @ApiOperation(value = "List of currencies with rates")
     public List<RateDto> getRatesList() throws URISyntaxException, IOException, InterruptedException {
-        return exRaresService.getRates();
+        return exRatesService.getRates();
     }
 }
