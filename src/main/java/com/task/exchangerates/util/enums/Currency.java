@@ -1,4 +1,4 @@
-package com.task.exchangerates.util;
+package com.task.exchangerates.util.enums;
 
 public enum Currency {
 

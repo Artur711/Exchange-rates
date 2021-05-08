@@ -1,12 +1,12 @@
 package com.task.exchangerates.controller;
 
-import com.task.exchangerates.dto.Amount;
+import com.task.exchangerates.dto.AmountDto;
 import com.task.exchangerates.dto.CurrencyDto;
-import com.task.exchangerates.dto.Exchange;
-import com.task.exchangerates.entity.Table;
+import com.task.exchangerates.dto.ExchangeDto;
+import com.task.exchangerates.dto.RateDto;
 import com.task.exchangerates.service.ExRaresService;
-import com.task.exchangerates.util.Currency;
-import com.task.exchangerates.util.CurrencyToCurrencyDtoConverter;
+import com.task.exchangerates.util.enums.Currency;
+import com.task.exchangerates.util.converter.CurrencyToCurrencyDtoConverter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,21 +35,21 @@ public class ExRaresController {
     }
 
     @GetMapping("/exchange")
-    public Amount exchange(@RequestBody Exchange exchange) throws
+    public AmountDto exchange(@RequestBody ExchangeDto exchange) throws
             URISyntaxException, IOException, InterruptedException {
 
         return (exchange.getExchangeFrom().equals(exchange.getExchangeTo())) ?
-                new Amount(exchange.getAmount(), exchange.getExchangeTo()) :
+                new AmountDto(exchange.getAmount(), exchange.getExchangeTo()) :
                 exRaresService.exchangeRates(exchange);
     }
 
     @GetMapping("/list")
-    public Table getRatesList() throws URISyntaxException, IOException, InterruptedException {
+    public List<RateDto> getRatesList() throws URISyntaxException, IOException, InterruptedException {
         return exRaresService.getRates();
     }
 
     @GetMapping("/exchange/sample")
-    public Exchange exchangeSample() {
-        return new Exchange(1068.3, Currency.EUR, Currency.USD);
+    public ExchangeDto exchangeSample() {
+        return new ExchangeDto(1068.3, Currency.EUR, Currency.USD);
     }
 }

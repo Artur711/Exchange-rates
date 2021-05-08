@@ -2,9 +2,9 @@ package com.task.exchangerates.dto;
 
 public class CurrencyDto {
 
-    private String name;
+    private final String name;
 
-    private String code;
+    private final String code;
 
     public CurrencyDto(String name, String code) {
         this.name = name;
