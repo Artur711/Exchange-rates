@@ -47,9 +47,4 @@ public class ExRaresController {
     public List<RateDto> getRatesList() throws URISyntaxException, IOException, InterruptedException {
         return exRaresService.getRates();
     }
-
-    @GetMapping("/exchange/sample")
-    public ExchangeDto exchangeSample() {
-        return new ExchangeDto(1068.3, Currency.EUR, Currency.USD);
-    }
 }
