@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: com.task.exchangerates.ExchangeRatesApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.418 s <<< FAILURE! - in com.task.exchangerates.ExchangeRatesApplicationTests
+contextLoads  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is java.lang.RuntimeException: Driver org.postgresql.Driver claims to not accept jdbcUrl, jdbc:h2:mem:51a67413-20a5-45d7-8191-d7591d6d6a64;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+Caused by: java.lang.RuntimeException: Driver org.postgresql.Driver claims to not accept jdbcUrl, jdbc:h2:mem:51a67413-20a5-45d7-8191-d7591d6d6a64;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+

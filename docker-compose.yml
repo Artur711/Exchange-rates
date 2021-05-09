@@ -1,0 +1,27 @@
+version: '3'
+services:
+  exchange-rates:
+    build: exchange-rates/
+    ports:
+      - "8050:8080"
+    depends_on:
+      - postgresdb
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/kambu
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+
+  postgresdb:
+    image: postgres
+    container_name: db
+    restart: always
+    ports:
+      - 5400:5432
+    environment:
+      POSTGRES_URL: jdbc:postgresql://localhost//db:5400
+      POSTGRES_USER: compose-postgres
+      POSTGRES_PASSWORS: compose-postgres
+      POSTGRES_DB: kambu
+      POSTGRES_HOST_AUTH_METHOD: trust
+
