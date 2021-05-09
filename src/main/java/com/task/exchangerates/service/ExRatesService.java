@@ -58,14 +58,14 @@ public class ExRatesService {
     }
 
     public List<RateDto> getRates() throws URISyntaxException, IOException, InterruptedException {
-        List<RateDto> ratesDto = rateDtoConverter.convertAll(nbpClient.getRates().getRates());
         addTextAsCall("Downloading currency rates.");
         List<String> currencies = Stream.of(Currency.values())
                 .map(Currency::toString)
                 .collect(Collectors.toList());
 
         addTextAsCall("Filter available rates of currencies.");
-        return ratesDto.stream()
+        return rateDtoConverter.convertAll(nbpClient.getRates().getRates())
+                .stream()
                 .filter(rateDto -> currencies.contains(rateDto.getCode()))
                 .collect(Collectors.toList());
     }
