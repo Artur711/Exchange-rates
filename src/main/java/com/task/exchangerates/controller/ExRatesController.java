@@ -18,6 +18,8 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping("/api/v1/exchange-rates")
 public class ExRatesController {
@@ -30,14 +32,14 @@ public class ExRatesController {
         this.converter = converter;
     }
 
-    @GetMapping
+    @GetMapping(produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "List of currencies available for conversion")
     public List<CurrencyDto> getRates() {
         exRatesService.addTextAsCall("Sharing list of available currencies.");
         return converter.convertAll(Arrays.asList(Currency.values()));
     }
 
-    @GetMapping("/exchange")
+    @GetMapping(value = "/exchange", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Currency conversion to another")
     public AmountDto exchange(@RequestBody ExchangeDto exchange) throws
             URISyntaxException, IOException, InterruptedException {
@@ -47,7 +49,7 @@ public class ExRatesController {
                 exRatesService.exchangeRates(exchange);
     }
 
-    @GetMapping("/list")
+    @GetMapping(value = "/list", produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "List of currencies with rates")
     public List<RateDto> getRatesList() throws URISyntaxException, IOException, InterruptedException {
         return exRatesService.getRates();
