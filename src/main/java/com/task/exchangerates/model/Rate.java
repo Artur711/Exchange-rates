@@ -15,6 +15,12 @@ public class Rate {
     @JsonSetter("mid")
     private double mid;
 
+    public Rate(String currency, String code, double mid) {
+        this.currency = currency;
+        this.code = code;
+        this.mid = mid;
+    }
+
     public String getCurrency() {
         return currency;
     }
